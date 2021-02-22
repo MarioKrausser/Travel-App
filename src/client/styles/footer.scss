@@ -1,0 +1,19 @@
+/* There are the codes for the footer styles */
+
+#ft {
+  grid-area: ft;
+  background-color: #3D3F45;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+}
+
+#ft > a {
+  padding: 50px 10px;
+
+  &:link, &:visited, &:hover, &:active {
+    text-decoration: none;
+    color: white;
+  }
+}

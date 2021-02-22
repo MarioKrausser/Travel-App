@@ -1,0 +1,40 @@
+/* There are the codes for the footer styles */
+
+header {
+  margin-bottom: 100px;
+
+  #navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #3D3F45;
+    padding: 20px 0;
+  }
+
+  #navbar > #navbarList {
+    margin-right: 50px;
+  }
+
+  #navbar #navbarList > .navbarLinks {
+    display: inline-block;
+    list-style-type: none;
+  }
+
+  #navbar .active {
+    background-color: #A62C21;
+    color: #fff;
+    font-size: 20px;
+    padding: 22px;
+
+    &:link, &:visited, &:hover, &:active {
+      text-decoration: none;
+    }
+  }
+
+  .title {
+    background-color: #A62C21;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px;
+  }
+}
