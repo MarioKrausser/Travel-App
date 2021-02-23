@@ -1,10 +1,15 @@
 /* There are the codes for the footer styles */
-.travel {
+
+section {
+  margin: 50px 0;
+}
+
+.travel-information {
   background-color: #a62c21;
   padding: 20px;
 }
 
-.travel > input {
+.travel-information > input {
   display:block;
   height: 30px;
   width: 200px;
@@ -15,7 +20,7 @@
   margin-bottom: 10px;
 }
 
-.travel > #submit {
+.travel-information > #submit {
   width: 110px;
   height: 40px;
   background: #3b4a6b;
@@ -26,18 +31,43 @@
   box-shadow: 2px 4px 5px #444;
 }
 
-section#travel-planer {
-  background-color: lightgray;
+#travel-planer {
+  background-color: #A62C21;
+  height: 500px;
 
 }
 
 #travel-planer > #title {
-  background-color: #A62C21;
-  font-size: 15px
+  background-color: #3b4a6b;
+  font-size: 15px;
+  padding: 20px;
 }
 
 #travel-planer > #results {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  height: 400px;
 }
+
+#travel-planer #picture {
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+  margin: 20px;
+
+}
+
+#travel-planer #city-information {
+  min-width: 200px;
+  min-height: 200px;
+  background-color: #3D3F45;
+  margin: 20px;
+}
+
+  @media (min-width: 480px) {
+
+    #travel-planer > #results {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
