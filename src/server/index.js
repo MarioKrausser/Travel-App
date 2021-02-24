@@ -1,5 +1,7 @@
-// Setup empty JS object to act as endpoint for all routes
-// const projectData = {};
+const dotenv = require('dotenv');
+dotenv.config();
+
+console.log(`Your API key is ${process.env.API_KEY}`);
 
 // Require Express to run server and routes
 const express = require('express');

@@ -1,34 +1,131 @@
 //API Data
-const baseUrl = "http://api.geonames.org/searchJSON?q=";
+const baseUrlGeonames = "http://api.geonames.org/searchJSON?q=";
 const userName = "&maxRows=10&username=mariokrausser";
+
+//API weatherbit
+const baseUrlWeatherbit = 'https://api.weatherbit.io/v2.0/forecast/daily';
+const keyWeatherbit = '5f149f514b114596942d101e6c8c71b7';
+
+const baseUrlPixabay = 'https://pixabay.com/api/?';
+const keyPixabay = '20390453-85fe319c3107f7ce8f5be2b01';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 const months = [ "January", "February", "March", "April", "May", "June", "July",
   "August", "September", "October", "November", "December" ];
-let today = d.getDate() + '. ' + months[ d.getMonth() ] + ' ' + d.getFullYear();
-document.getElementById( 'submit' ).addEventListener( 'click', onSubmit );
-async function onSubmit( e ) {
+let today = d.getFullYear() + '-' + ( "0" + ( d.getMonth() + 1 )).slice( -2 ) + '-' + d.getDate();
+let dateControl = document.querySelector('input[type="date"]');
+
+
+dateControl.value = today;
+dateControl.min = today;
+dateControl.max = add16days()
+
+document.getElementById( 'submit' ).addEventListener( 'click', performAction );
+async function performAction( e ) {
   e.preventDefault()
   // Get ZIP
-  const location =  document.getElementById( 'place' ).value;
-  // Get user response
-  const date =  document.getElementById( 'date' ).value;
+  const location = document.getElementById( 'place' ).value;
   // API Call
   if ( location ) {
-    fetch( baseUrl + location + userName )
-      .then( result => result.json() )
-      .then( result => {
-        console.log( result );
+    fetch( baseUrlGeonames + location + userName )
+      .then( resultGeonames => resultGeonames.json() )
+      .then( resultGeonames => {
+        console.log( resultGeonames );
+        fetch( baseUrlWeatherbit + '?lat=' + resultGeonames.geonames[0].lat + '&lon=' + resultGeonames.geonames[0].lng + '&key=' + keyWeatherbit )
+          .then( resultWeatherbit => resultWeatherbit.json() )
+          .then( resultWeatherbit => {
+            console.log( resultWeatherbit );
+            document.getElementById( 'weather-temp' ).innerHTML = `there is a temperature of ${ resultWeatherbit.data[daysLeft( dateControl.value )].temp } °`;
+            document.getElementById( 'weather-despription' ).innerHTML = `and it is ${ resultWeatherbit.data[0].weather.description }`;
+            document.getElementById( 'travel-date' ).innerHTML = `${ resultWeatherbit.data[daysLeft( dateControl.value )].datetime }`;
+          })
+        fetch( baseUrlPixabay + 'key=' + keyPixabay + '&q=' + location + '&image_type=photo' )
+          .then( resultPixabay => resultPixabay.json() )
+          .then( resultPixabay => {
+            console.log( resultPixabay );
+            document.getElementById( 'picture' ).innerHTML = `<img src=${ resultPixabay.hits[0].previewURL }>`;
+          })
+        document.getElementById( 'city' ).innerHTML = `In ${ resultGeonames.geonames[0].name }`;
+        document.getElementById( 'country' ).innerHTML = `in ${ resultGeonames.geonames[0].countryName }`;
+
       })
   } else {
     alert( 'write please a location');
   }
+  daysLeft( dateControl.value );
+
+
+}
+function daysLeft( startTrip ) {
+  const day = parseInt( startTrip.substring( 8 ) );
+  let month = startTrip.substring( 5, 7 );
+  if ( month.substring( 0,1 ) === '0' ) {
+    month.slice( 0, 1 );
+  }
+  month = parseInt( month ) -1;
+  const year = parseInt( startTrip.substring( 0, 4 ) );
+  const oneDay = 24*60*60*1000;
+  const end = new Date( year, month, day );
+  const result = Math.ceil((  end.getTime() - d.getTime() ) / oneDay);
+  return Math.abs( result );
 }
 
-export { onSubmit }
+function add16days() {
+  const maxDays = new Date();
+  maxDays.setDate( maxDays.getDate() + 16 )
+  return maxDays.getFullYear() + '-' + ( "0" + ( maxDays.getMonth() + 1 )).slice( -2 ) + '-' + maxDays.getDate();
+}
 
-
+// API call, get data
+const getWeatherData = async ( baseURL, lat, lon, key ) => {
+  console.log( 'url: ', baseURL, lat, lon, key );
+  const res = await fetch( baseURL + lat + lon + key )
+  try {
+    const data = await res.json();
+    console.log( 'Data_of_api: ', data )
+    return data;
+  }  catch( error ) {
+    console.log( "error" , error );
+  }
+}
+// POST METHOD, post Data to server
+const postData = async ( url = '', data = {} ) => {
+  const response = await fetch( url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify( data ),
+  });
+  try {
+    const newData = await response.json();
+    console.log( newData );
+    return newData;
+  } catch( error ) {
+    console.log( "error", error );
+  }
+};
+// Async GET
+const updateUI = async ( city, zip ) =>{
+  const request = await fetch( '/all' );
+  try {
+    // Transform into JSON
+    const allData = await request.json()
+    console.log( 'updateUI', allData );
+    // update UI
+    document.getElementById( 'weather-temp' ).innerHTML = `Weather data in ${ city }, ${ zip }`;
+    document.getElementById( 'travel-date' ).innerHTML = `Date: ${ allData.date }`;
+    document.getElementById( 'weather-temp' ).innerHTML = `Temperature: ${ allData.data[0].temp } °`;
+    document.getElementById( 'weather-despription' ).innerHTML = `Despription: ${ allData.data[0].weather.despription }`;
+    document.getElementById( 'weather-picture' ).innerHTML = `${ allData.data[0].weather.icon }`;
+  }
+  catch(error) {
+    console.log("error", error);
+  }
+};
+export { performAction }
 
 
 

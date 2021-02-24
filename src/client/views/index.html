@@ -101,13 +101,18 @@
 
     <main>
       <section>
-        <form class="travel-information" onsubmit="return">
-          <label for="place"></label>
-          <input id="place" type="text" name="place" value="" placeholder="Your destination">
-          <label for="date"></label>
-          <input id="date" type="text" name="date" value="" placeholder="Your date">
-          <input id="submit" type="submit" name="button" value="submit" placeholder="Your date">
-        </form>
+        <div class="travel-information">
+          <form class="form" onsubmit="return">
+            <p>Where do you want to go?</p>
+            <label for="place"></label>
+            <input id="place" type="text" name="place" value="" placeholder="Your destination">
+            <p>What is you travel date?</p>
+            <label for="date"></label>
+            <input id="date" type="date" name="date" value="" placeholder="Your date">
+            <input id="submit" type="submit" name="button" value="submit" placeholder="Your date">
+          </form>
+        </div>
+
       </section>
 
       <section id="travel-planer">
@@ -118,8 +123,10 @@
           <div id="picture"></div>
           <div id="city-information">
             <div id="city"></div>
+            <div id="country"></div>
             <div id="travel-date"></div>
-            <div id="weather"></div>
+            <div id="weather-temp"></div>
+            <div id="weather-despription"></div>
           </div>
 
         </div>

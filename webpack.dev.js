@@ -20,6 +20,11 @@ module.exports = {
     compress: true,
     port: 8888,
   },
+  resolve: {
+    fallback: {
+      fs: false,
+    },
+  },
   module: {
     rules: [
       {
