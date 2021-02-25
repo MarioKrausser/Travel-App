@@ -12,7 +12,8 @@ module.exports = {
   output: {
     libraryTarget: 'var',
     library: 'Client',
-    filename: 'utils.min.js',
+    filename: 'bundle.js',
+    // filename: 'utils.min.js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
@@ -39,13 +40,13 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif)$/i,
         type: 'asset/resource'
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          'file-loader',
+        ],
       }
-      // {
-      //   test: /\.(png|svg|jpg|gif)$/,
-      //   use: [
-      //     'file-loader',
-      //   ],
-      // }
     ]
   },
   plugins: [

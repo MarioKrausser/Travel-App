@@ -42,7 +42,6 @@ section {
 
 #travel-planer {
   background-color: #A62C21;
-  height: 500px;
 
 }
 
@@ -56,26 +55,25 @@ section {
 #travel-planer > #results {
   display: flex;
   flex-direction: column;
-  height: 400px;
 }
 
 #travel-planer #picture {
-  width: 200px;
-  height: 200px;
   background-color: #3D3F45;
   margin: 20px;
-
+  align-self: center;
 }
 
 #travel-planer #city-information {
-  min-width: 200px;
-  min-height: 200px;
   background-color: lightblue;
   margin: 20px;
-  padding: 20px;
+  align-self: center;
 }
 
-  @media (min-width: 480px) {
+#travel-planer #city-information > div {
+ margin: 5px;
+}
+
+  @media (min-width: 650px) {
 
     #travel-planer > #results {
       flex-direction: row;
