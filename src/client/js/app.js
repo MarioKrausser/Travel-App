@@ -74,6 +74,14 @@ async function performAction( e ) {
 
 }
 
+function hoverState(e) {
+  e.target.style.border = "black, 5px, solid";
+}
+
+function hoverStateButton(e) {
+  e.target.style.color = "red";
+}
+
 function daysLeft( startTrip ) {
   const day = parseInt( startTrip.substring( 8 ) );
   let month = startTrip.substring( 5, 7 );
@@ -109,7 +117,7 @@ const postData = async ( url = '', data = {} ) => {
 
 postData( 'http://localhost:8000/addData', { journeyInformation: cities } );
 
-export { performAction }
+export { performAction, hoverState, hoverStateButton }
 
 
 

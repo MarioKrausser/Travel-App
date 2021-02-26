@@ -1,6 +1,8 @@
 import { performAction } from './js/app.js'
 import { addCalender} from "./js/calender";
 import { keys } from "../server/serverKeys";
+import { hoverState } from "./js/app.js";
+import { hoverStateButton } from "./js/app.js";
 
 
 //import the styles files
@@ -14,4 +16,6 @@ export {
   performAction,
   addCalender,
   keys,
+  hoverState,
+  hoverStateButton,
 }

@@ -30,6 +30,7 @@ section {
 
   &:hover {
     cursor: pointer;
+    border: black 5px solid;
   }
 }
 
@@ -45,6 +46,7 @@ section {
 
   &:hover {
     cursor: pointer;
+    color: red;
   }
 }
 
