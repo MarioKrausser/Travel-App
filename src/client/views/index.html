@@ -102,7 +102,7 @@
     <main>
       <section>
         <div class="travel-information">
-          <form class="form" onsubmit="return">
+          <form class="form-submit" onsubmit="return">
             <p>Where do you want to go?</p>
             <label for="place"></label>
             <input id="place" type="text" name="place" value="" placeholder="Your destination">
@@ -120,9 +120,7 @@
           <strong>Travel Results:</strong>
         </div>
         <div id="results">
-          <div id="picture">
-<!--            <img id="pictures" alt="city-picture"  src="">-->
-          </div>
+          <div id="picture"></div>
           <div id="city-information">
             <div id="city"></div>
             <div id="country"></div>
@@ -143,15 +141,15 @@
       <a href="">Cookies</a>
     </footer>
 
-<!--<script>-->
-<!--  // Check that service workers are supported-->
-<!--  if ('serviceWorker' in navigator) {-->
-<!--    // Use the window load event to keep the page load performant-->
-<!--    window.addEventListener('load', () => {-->
-<!--      navigator.serviceWorker.register('/service-worker.js');-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
+<script>
+  // Check that service workers are supported
+  if ('serviceWorker' in navigator) {
+    // Use the window load event to keep the page load performant
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js');
+    });
+  }
+</script>
 
 </body>
 </html>

@@ -11,4 +11,13 @@ and wrapped up with service workers.
 This will require modifying the `index.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
 
 ## Dependencies
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+
+In this project we have several dependencies to start the server. We use express, cors and body-parser.
+Allso we use webpack and weppack-cli to bundle the project. 
+
+## Installation
+
+* clone from GitHub the directory
+* run npm install or npm i to install dependencies
+* run npm start-prod to start up the server
+* now you can open the web page on localhost:8000 
